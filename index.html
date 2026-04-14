@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+<meta name="theme-color" content="#0d0f14"/>
+<title>Mengapa Berita Indonesia Selalu Negatif? — KBDI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+
+/* ═══════════════════════════════════════
+   TEMA: DARK (default) & LIGHT
+═══════════════════════════════════════ */
+:root {
+  /* shared */
+  --red:        #c0391e;
+  --red-dim:    #8a3520;
+  --gold:       #b8860b;
+  --gold-light: #d4a520;
+  --orange:     #e87722;
+  --max:        680px;
+  --pad:        clamp(18px, 5vw, 40px);
+  --transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+
+/* DARK */
+[data-theme="dark"] {
+  --bg:           #0d0f14;
+  --bg-soft:      #13161d;
+  --bg-warm:      #181c24;
+  --bg-card:      #1a1e28;
+  --border:       #2a2f3d;
+  --border-strong:#3a4050;
+  --text:         #e8ddd0;
+  --text-2:       #b0a898;
+  --text-3:       #6a6560;
+  --red-bg:       #2a1410;
+  --red-border:   #5a2518;
+  --gold-bg:      #1e1a0a;
+  --gold-border:  #4a3808;
+  --gold-link:    #d4a520;
+  --blue:         #6aabf0;
+  --blue-bg:      #0e1828;
+  --blue-border:  #1e3858;
+  --mark-bg:      rgba(180,130,10,.2);
+  --pullquote-bg: #16191f;
+  --echo-from:    #0f1a2e;
+  --echo-to:      #1a0f08;
+  --source-bg:    #13161d;
+}
+
+/* LIGHT */
+[data-theme="light"] {
+  --bg:           #ffffff;
+  --bg-soft:      #f7f5f2;
+  --bg-warm:      #f0ebe3;
+  --bg-card:      #f7f5f2;
+  --border:       #e2dbd2;
+  --border-strong:#c8bfb0;
+  --text:         #1a1714;
+  --text-2:       #4a4540;
+  --text-3:       #7a746c;
+  --red-bg:       #fdf1ee;
+  --red-border:   #f0c4bb;
+  --gold-bg:      #fdf8ee;
+  --gold-border:  #e8d090;
+  --gold-link:    #8a6500;
+  --blue:         #1a4a8a;
+  --blue-bg:      #eef3fb;
+  --blue-border:  #b8cef0;
+  --mark-bg:      rgba(138,101,0,.13);
+  --pullquote-bg: #f2ede6;
+  --echo-from:    #0f1a2e;
+  --echo-to:      #1a0f08;
+  --source-bg:    #f0ebe3;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(15px, 2.2vw, 17px);
+  line-height: 1.8;
+  overflow-x: hidden;
+  transition: var(--transition);
+}
+
+a { color: var(--gold-link); text-underline-offset: 3px; transition: color .2s; }
+a:hover { color: var(--red); }
+strong { color: var(--text); font-weight: 600; }
+em.term { color: var(--red); font-style: italic; }
+mark {
+  background: var(--mark-bg);
+  color: var(--text);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ═══════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════ */
+#progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), var(--gold-light));
+  z-index: 10000; transition: width .1s linear;
+  box-shadow: 0 0 8px rgba(192,57,30,.4);
+}
+
+/* Header & footer dimuat dari GitHub — lihat script di bawah */
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(48px,8vw,80px) var(--pad) clamp(36px,6vw,60px);
+  transition: var(--transition);
+}
+.hero-inner { max-width: var(--max); margin: 0 auto; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 18px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 20px; height: 2px;
+  background: var(--red); border-radius: 2px; flex-shrink: 0;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.9rem,5.5vw,3.2rem);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -.02em; color: var(--text);
+  margin-bottom: 20px; transition: color .3s;
+}
+h1 em { color: var(--red); font-style: italic; font-weight: 400; }
+
+.hero-deck {
+  font-family: 'Lora', serif;
+  font-size: clamp(1rem,2.5vw,1.15rem);
+  font-style: italic; font-weight: 400;
+  color: var(--text-2); line-height: 1.7;
+  margin-bottom: 24px; max-width: 560px;
+  transition: color .3s;
+}
+.hero-meta { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 20px; border-top: 1px solid var(--border); }
+.pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--text-3);
+  background: var(--bg); transition: var(--transition);
+}
+
+/* ═══════════════════════════════════════
+   ARTICLE BODY
+═══════════════════════════════════════ */
+.article {
+  max-width: var(--max); margin: 0 auto;
+  padding: clamp(32px,6vw,56px) var(--pad) 80px;
+}
+
+p { color: var(--text-2); margin-bottom: 1.3rem; transition: color .3s; }
+p:last-child { margin-bottom: 0; }
+
+.lead::first-letter {
+  font-family: 'Lora', serif;
+  font-size: 4.5em; font-weight: 700;
+  float: left; line-height: .8;
+  margin: 5px 7px 0 0; color: var(--red);
+}
+
+/* ═══════════════════════════════════════
+   HEADINGS
+═══════════════════════════════════════ */
+h2 {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.35rem,3.5vw,1.75rem);
+  font-weight: 700; line-height: 1.25;
+  color: var(--text); margin: 2.8rem 0 .9rem;
+  padding-top: 2.2rem; border-top: 2px solid var(--border);
+  position: relative; transition: color .3s, border-color .3s;
+}
+h2::after {
+  content: ''; position: absolute;
+  bottom: calc(-0.9rem - 2px); left: 0;
+  width: 36px; height: 2px;
+  background: var(--red); border-radius: 2px;
+}
+h3 {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem; font-weight: 600; font-style: italic;
+  color: var(--gold-light); margin: 1.8rem 0 .6rem;
+  transition: color .3s;
+}
+[data-theme="light"] h3 { color: var(--gold); }
+
+/* ═══════════════════════════════════════
+   PULL QUOTE
+═══════════════════════════════════════ */
+.pullquote {
+  margin: 2rem 0;
+  padding: 24px 24px 20px 28px;
+  background: var(--pullquote-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: 0 8px 8px 0;
+  transition: var(--transition);
+}
+.pullquote blockquote {
+  font-family: 'Lora', serif;
+  font-size: clamp(1rem,2.8vw,1.2rem);
+  font-style: italic; line-height: 1.6; color: var(--text);
+}
+.pullquote cite {
+  display: block; margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-3); font-style: normal;
+}
+
+/* ═══════════════════════════════════════
+   CALLOUTS
+═══════════════════════════════════════ */
+.callout {
+  border-radius: 8px; padding: 18px 20px;
+  margin: 1.8rem 0; border: 1px solid;
+  transition: var(--transition);
+}
+.callout-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.callout p { font-size: .9rem; line-height: 1.65; }
+.callout p + p { margin-top: .7rem; }
+
+.callout.warning {
+  background: var(--gold-bg); border-color: var(--gold-border); color: var(--text-2);
+}
+.callout.warning .callout-label { color: var(--gold-light); }
+[data-theme="light"] .callout.warning { background: #fffbee; color: #5a4a00; }
+[data-theme="light"] .callout.warning .callout-label { color: #8a6500; }
+
+.callout.tip {
+  background: var(--gold-bg); border-color: var(--gold-border); color: var(--text-2);
+}
+.callout.tip .callout-label { color: var(--gold-light); }
+[data-theme="light"] .callout.tip { color: var(--text-2); }
+
+/* ═══════════════════════════════════════
+   CASE STUDY
+═══════════════════════════════════════ */
+.case {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  border-radius: 0 0 8px 8px;
+  padding: 18px 20px; margin: 1.2rem 0 1.8rem;
+  transition: var(--transition);
+}
+.case-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+}
+.case p { font-size: .88rem; color: var(--text-2); margin-bottom: .65rem; }
+.case a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem; color: var(--gold-link); word-break: break-all;
+  display: inline-block; margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   ECHO CHAMBER CARD
+═══════════════════════════════════════ */
+.echo-card {
+  background: linear-gradient(135deg, var(--echo-from), var(--echo-to));
+  border-radius: 12px; overflow: hidden;
+  margin: 2rem 0; border: 1px solid rgba(255,255,255,.08);
+  position: relative;
+}
+.echo-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 20px,
+    rgba(255,255,255,.015) 20px, rgba(255,255,255,.015) 21px
+  );
+  pointer-events: none;
+}
+.echo-inner { position: relative; z-index: 1; padding: 28px 24px 24px; }
+.echo-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: #7ab8f5; background: rgba(100,160,240,.12);
+  border: 1px solid rgba(100,160,240,.25);
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 14px;
+}
+.echo-badge::before { content: '◉'; font-size: 7px; }
+.echo-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.1rem,3vw,1.4rem);
+  font-weight: 700; color: #f0e8d8;
+  margin-bottom: 10px; line-height: 1.3;
+}
+.echo-desc { font-size: .88rem; color: rgba(200,185,165,.8); line-height: 1.65; margin-bottom: 18px; }
+.echo-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--red); color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .85rem; font-weight: 600;
+  padding: 10px 20px; border-radius: 6px;
+  text-decoration: none; transition: background .2s, transform .15s;
+}
+.echo-cta:hover { background: #a02d17; color: #fff; transform: translateY(-1px); }
+.echo-cta::after { content: '→'; font-size: 1rem; }
+
+/* ═══════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════ */
+.div {
+  display: flex; align-items: center; gap: 12px;
+  margin: 2.2rem 0; color: var(--border);
+}
+.div::before, .div::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.div span { font-family: 'Lora', serif; font-size: 1rem; color: var(--border-strong); }
+
+/* ═══════════════════════════════════════
+   CHECKLIST
+═══════════════════════════════════════ */
+.checklist { list-style: none; margin: 1.2rem 0; display: flex; flex-direction: column; gap: 8px; }
+.checklist li {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 13px 16px;
+  font-size: .9rem; color: var(--text-2); line-height: 1.65;
+  transition: var(--transition), border-color .2s;
+}
+.checklist li:hover { border-color: var(--gold-border); }
+.check-icon {
+  flex-shrink: 0; width: 20px; height: 20px;
+  background: var(--gold-bg); border: 1px solid var(--gold-border);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  margin-top: 2px; transition: var(--transition);
+}
+.check-icon svg { width: 11px; height: 11px; stroke: var(--gold-light); }
+[data-theme="light"] .check-icon svg { stroke: var(--gold); }
+
+/* ═══════════════════════════════════════
+   SOURCES
+═══════════════════════════════════════ */
+.sources {
+  background: var(--source-bg); border: 1px solid var(--border);
+  border-top: 3px solid var(--gold-border);
+  border-radius: 8px; padding: 24px 22px; margin-top: 2.5rem;
+  transition: var(--transition);
+}
+.sources-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 16px;
+}
+[data-theme="light"] .sources-title { color: var(--gold); }
+.sources ol { list-style: none; counter-reset: src; display: flex; flex-direction: column; gap: 10px; }
+.sources li {
+  counter-increment: src; padding-left: 30px; position: relative;
+  font-size: .8rem; color: var(--text-3); line-height: 1.55;
+}
+.sources li::before {
+  content: counter(src); position: absolute; left: 0; top: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+  color: var(--gold-light); background: var(--gold-bg);
+  border: 1px solid var(--gold-border); border-radius: 3px;
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+[data-theme="light"] .sources li::before { color: var(--gold); }
+.sources a { font-family: 'JetBrains Mono', monospace; font-size: .68rem; word-break: break-all; }
+
+/* Footer dimuat dari GitHub — lihat script di bawah */
+
+/* ═══════════════════════════════════════
+   REVEAL ANIMATION
+═══════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  h1 { font-size: 1.75rem; }
+  .pullquote { padding: 18px 16px 16px 20px; }
+  #kbdi-header .kbdi-logo-tagline { display: none; }
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress"></div>
+
+<!-- ══════════════════ KBDI HEADER — dimuat dari GitHub ══════════════════ -->
+<div id="kbdi-header-slot"></div>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Literasi Informasi</div>
+    <h1>Mengapa Berita di Indonesia<br>Selalu Saja <em>Negatif?</em></h1>
+    <p class="hero-deck">Bukan karena Indonesia negara yang buruk — melainkan karena negativitas adalah komoditas paling menguntungkan di era algoritma.</p>
+    <div class="hero-meta">
+      <span class="pill">Media Criticism</span>
+      <span class="pill">Literasi Digital</span>
+      <span class="pill">Disinformasi</span>
+      <span class="pill">Psikologi Media</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ARTICLE ══════════════════ -->
+<main class="article">
+
+  <div class="reveal">
+    <p class="lead">Setiap kali membuka media sosial, linimasa kita penuh berita yang memancing emosi: korupsi pejabat, kebijakan kontroversial, kelakuan oknum masyarakat yang memalukan. Seolah Indonesia adalah negara yang terus-menerus dilanda masalah tanpa henti. Tapi apakah itu potret yang akurat?</p>
+    <p>Jawabannya pendek: <strong>tidak sepenuhnya.</strong> Yang kita alami adalah hasil dari mekanisme ekonomi, psikologi, dan teknologi yang saling berkelindan — dan semuanya mengarah ke satu kesimpulan: <mark>berita buruk adalah bisnis yang menguntungkan.</mark></p>
+  </div>
+
+  <div class="div"><span>✦</span></div>
+
+  <!-- BAGIAN 1 -->
+  <div class="reveal">
+    <h2>The Bad News Is the Good News</h2>
+    <p>Perusahaan media — sekelas Kompas, Tempo, maupun iNews — pada akhirnya adalah entitas bisnis. Mereka bertahan bukan hanya dari idealisme jurnalistik, melainkan dari klik, tayangan, dan iklan. Dan data konsisten menunjukkan satu hal: <strong>masyarakat jauh lebih banyak mengklik berita negatif daripada positif.</strong></p>
+    <p>Fenomena ini dalam psikologi dikenal sebagai <em class="term">negativity bias</em> — kecenderungan otak manusia memberi bobot lebih besar pada informasi yang mengandung ancaman atau bahaya dibandingkan informasi netral atau positif. Ini bukan kelemahan karakter; ini warisan evolusi jutaan tahun. Nenek moyang yang lebih waspada terhadap bahaya cenderung lebih bertahan hidup.</p>
+  </div>
+
+  <div class="reveal">
+    <div class="pullquote">
+      <blockquote>"Bad is stronger than good" — ancaman, kerugian, dan informasi negatif secara konsisten diproses lebih dalam dan lebih cepat di otak manusia dibandingkan informasi positif yang setara bobotnya.</blockquote>
+      <cite>Baumeister et al. (2001) — Review of General Psychology, Vol. 5(4)</cite>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <p>Hasilnya? Berita positif pun, jika ada, tetap dikemas dengan narasi yang menekankan kekurangan — atau komentarnya tetap negatif. <strong>Algoritma media sosial memperparah ini</strong> — ia tidak memprioritaskan kebenaran atau keseimbangan, melainkan <em>engagement</em>: komentar, share, dan reaksi emosional. Tidak ada yang lebih emosional dari kemarahan.</p>
+  </div>
+
+  <div class="div"><span>✦</span></div>
+
+  <!-- BAGIAN 2 -->
+  <div class="reveal">
+    <h2>Homeless Media &amp; Cherry Picking</h2>
+    <p>Masalah makin rumit dengan kehadiran <em class="term">Homeless Media</em> — akun atau portal berita yang tidak terdaftar sebagai lembaga pers resmi di Dewan Pers Indonesia. Mereka tidak terikat Kode Etik Jurnalistik, tidak punya mekanisme koreksi transparan, dan tidak memiliki redaktur yang bertanggung jawab.</p>
+    <p>Homeless Media umumnya beroperasi dengan pola <em class="term">cherry picking</em>: hanya menyebarkan informasi yang sesuai dengan narasi yang sudah dibangun untuk audiens mereka. Tanpa verifikasi. Tanpa konteks. Kadang tanpa fakta sama sekali.</p>
+
+    <div class="callout warning">
+      <div class="callout-label">⚠ Perlu Diketahui</div>
+      <p>Media resmi yang terdaftar di Dewan Pers pun masih kadang melanggar kode etik jurnalistik. Bayangkan standar yang berlaku di media yang sama sekali tidak terdaftar. Di luar media, akun meme, fandom, dan <em>shitpost</em> turut membentuk pola pikir yang bias terhadap suatu isu — tanpa niat jahat sekalipun.</p>
+    </div>
+  </div>
+
+  <div class="div"><span>✦</span></div>
+
+  <!-- BAGIAN 3: ECHO CHAMBER -->
+  <div class="reveal">
+    <h2>Echo Chamber: Saat Kita Hanya Mendengar Diri Sendiri</h2>
+    <p>Semua ini diperparah oleh fenomena yang disebut <em class="term">echo chamber</em> — ruang gema di mana kita hanya terekspos pada informasi yang sesuai dengan keyakinan yang sudah kita pegang. Algoritma media sosial secara aktif membangun ruang ini: konten yang kita sukai, kita share, dan kita komentari akan terus ditampilkan lebih banyak.</p>
+    <p>Akibatnya, seseorang yang sering mengklik berita negatif tentang pemerintah akan makin banyak mendapat berita negatif tentang pemerintah. Bukan karena Indonesia makin buruk — tapi karena <mark>algoritma semakin pintar mengunci kita di dalam cermin kita sendiri.</mark></p>
+
+    <div class="echo-card">
+      <div class="echo-inner">
+        <div class="echo-badge">Baca Lebih Lanjut</div>
+        <div class="echo-title">Apa Itu Echo Chamber dan Mengapa Itu Berbahaya?</div>
+        <p class="echo-desc">Pelajari lebih dalam bagaimana echo chamber terbentuk, mengapa otak kita rentan terhadapnya, dan apa yang bisa kita lakukan untuk keluar dari ruang gema — dalam artikel edukatif yang lebih lengkap.</p>
+        <a href="https://edukbdi.github.io/Echo-Chamber/" class="echo-cta" target="_blank" rel="noopener">Baca Artikel Lengkap</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="div"><span>✦</span></div>
+
+  <!-- BAGIAN 4: STUDI KASUS -->
+  <div class="reveal">
+    <h2>Studi Kasus: Berita yang Kamu Salah Pahami</h2>
+    <p>Pola ini bukan teori semata. Mari kita lihat dua contoh nyata bagaimana narasi negatif yang tidak lengkap menyebar dan dipercaya jutaan orang.</p>
+
+    <h3>Kasus 1 — Check-in Hotel Tanpa Nikah Dipenjara?</h3>
+    <p>Pada 2022–2023, pengesahan RKUHP memicu kepanikan massal. Banyak media memberitakannya dengan judul sensasional yang menyiratkan semua orang yang check-in hotel bersama tanpa ikatan nikah bisa langsung dipenjara — bahkan diklaim akan mengancam wisatawan asing yang datang ke Indonesia.</p>
+    <p>Kenyataannya? Pasal tersebut adalah <strong>delik aduan</strong>: hanya bisa diproses jika pasangan sah (suami/istri) yang melaporkan, atau untuk anak di bawah umur yang dilaporkan orang tuanya. Tanpa pengaduan dari pihak yang bersangkutan, tidak ada kasus.</p>
+
+    <div class="case">
+      <div class="case-label">📎 Sumber</div>
+      <p>Judul berita dari CNBC Indonesia sudah cukup membuat netizen panik — padahal isi beritanya memuat penjelasan yang lebih lengkap, yang kebanyakan pembaca tidak sempat membacanya.</p>
+      <a href="https://www.cnbcindonesia.com/news/20221206112450-4-394165/rkuhp-disahkan-check-in-hotel-tidak-nikah-dipenjara-1-tahun" target="_blank" rel="noopener">↗ CNBC Indonesia — RKUHP Disahkan: Check-in Hotel Tidak Nikah, Dipenjara 1 Tahun</a>
+    </div>
+
+    <h3>Kasus 2 — Negara Menyita Tanah Rakyat?</h3>
+    <p>Narasi serupa muncul soal peraturan "penyitaan tanah terlantar." Banyak yang mengira semua tanah — termasuk yang bersertifikat SHM — bisa dirampas begitu saja oleh negara. Kepanikan menyebar luas di media sosial.</p>
+    <p>Padahal aturannya hanya berlaku untuk tanah dengan status HGB, HGU, dan Hak Pakai yang ditelantarkan — bukan SHM. Dan peraturan ini sama sekali bukan baru: sudah ada sejak 2010 dan hanya diperbarui di 2021.</p>
+
+    <div class="case">
+      <div class="case-label">📎 Sumber Klarifikasi</div>
+      <a href="https://regional.kompas.com/read/2025/08/07/142705078/negara-bisa-ambil-alih-tanah-telantar-ini-aturan-dan-mekanismenya" target="_blank" rel="noopener">↗ Kompas.com — Negara Bisa Ambil Alih Tanah Terlantar: Ini Aturan dan Mekanismenya</a>
+    </div>
+  </div>
+
+  <div class="div"><span>✦</span></div>
+
+  <!-- BAGIAN 5: INFLUENCER -->
+  <div class="reveal">
+    <h2>Ketika Influencer Menjadi Mesin Hoaks</h2>
+    <p>Media bukan satu-satunya aktor dalam ekosistem disinformasi ini. <strong>Influencer</strong> — dengan jutaan pengikut setia — bisa menjadi mesin penyebar narasi yang jauh lebih efektif dari media mana pun, justru karena mereka dipercaya secara personal oleh audiens.</p>
+    <p>Kasus YouTuber <em class="term">Neo Japan</em> (Dian Kusuma) menjadi contoh sempurna bagaimana sebuah narasi yang berangkat dari kekhawatiran nyata bisa membengkak menjadi hoaks yang menghebohkan nasional.</p>
+    <p>Kronologinya: pada pertengahan 2025, Neo Japan menyebarkan informasi bahwa ia dihubungi pejabat Jepang dan <strong>2026 akan menjadi tahun terakhir WNI bisa bekerja di Jepang</strong> — karena kelakuan oknum WNI, termasuk anggota PSHT yang melakukan kegiatan tanpa izin di fasilitas umum.</p>
+    <p>Narasi ini viral luar biasa. <mark>Informasi itu ditelan mentah-mentah — bukan karena ada buktinya, melainkan karena sesuai dengan apa yang ingin dipercaya oleh audiens.</mark></p>
+  </div>
+
+  <div class="reveal">
+    <div class="pullquote">
+      <blockquote>Apapun ucapannya akan diikuti pengikutnya walaupun tidak masuk akal — karena mereka sudah melihat dengan perasaan, bukan dengan logika.</blockquote>
+      <cite>Fenomena Audience Capture dalam ekosistem konten digital</cite>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <p><strong>KBRI Tokyo turun tangan langsung.</strong> Dalam siaran pers resmi 15 Juli 2025, KBRI Tokyo menyatakan dengan tegas bahwa narasi "blacklist 2026" adalah tidak benar.</p>
+
+    <div class="case">
+      <div class="case-label">📋 Klarifikasi Resmi Pemerintah</div>
+      <p><em>"Pemerintah Jepang tidak pernah menyampaikan hal tersebut, dan isu ini bukan bagian dari pembahasan resmi antara Pemerintah Indonesia dan Jepang."</em></p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-3);margin-top:4px;">— Siaran Pers Resmi KBRI Tokyo, 15 Juli 2025</p>
+      <p style="margin-top:10px;">Bantahan juga datang langsung dari Menteri P2MI Abdul Kadir Karding. Data Kantor Imigrasi Jepang per Desember 2024 justru menunjukkan jumlah WNI di Jepang mencapai 199.824 orang — naik lebih dari 15% dalam enam bulan terakhir.</p>
+      <a href="https://www.antaranews.com/berita/4968889/kbri-tokyo-2026-jadi-tahun-terakhir-pmi-ke-jepang-tidak-benar" target="_blank" rel="noopener">↗ ANTARA News — KBRI Tokyo: 2026 jadi tahun terakhir PMI ke Jepang tidak benar</a><br>
+      <a href="https://tirto.id/benarkah-jepang-blacklist-wni-2026-cek-penjelasan-kbri-tokyo-heBQ" target="_blank" rel="noopener">↗ Tirto.id — Benarkah Jepang Blacklist WNI 2026? Cek Penjelasan KBRI Tokyo</a>
+    </div>
+
+    <p>Ada <em>kernel of truth</em> di sini: memang ada sejumlah insiden WNI bermasalah di Jepang. PSHT Cabang Jepang pernah melakukan kegiatan tidak sesuai norma setempat — meski video yang viral menampilkan kejadian 3–4 tahun sebelumnya, dan PSHT sudah meminta maaf ke KBRI Tokyo. Dari fakta-fakta parsial itu, dibuatlah kesimpulan besar yang tidak pernah dikonfirmasi satu pun otoritas resmi.</p>
+
+    <div class="callout tip">
+      <div class="callout-label">💡 Pola yang Perlu Dikenali</div>
+      <p><strong>Audience Capture</strong> terjadi ketika seorang kreator konten terjebak melayani ekspektasi audiens yang sudah terlanjur terbentuk. Apapun yang disampaikan — selama sesuai sentimen yang ada — akan diterima tanpa kritis. Ini lebih berbahaya dari Homeless Media karena dibalut kepercayaan personal yang jauh lebih dalam.</p>
+    </div>
+  </div>
+
+  <div class="div"><span>✦</span></div>
+
+  <!-- BAGIAN 6: PENUTUP -->
+  <div class="reveal">
+    <h2>Apa yang Harus Kita Lakukan?</h2>
+    <p>Kita hidup di era di mana hampir semua tindakan, sikap, dan penilaian kita dibentuk oleh konten yang algoritmanya dirancang bukan untuk membuat kita lebih cerdas — melainkan untuk membuat kita terus menggulir layar.</p>
+
+    <ul class="checklist">
+      <li>
+        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>
+        <div><strong>Tunda emosi, baca sampai selesai.</strong> Judul adalah umpan. Isi berita sering jauh lebih bernuansa. Jika marah hanya dari membaca judul, kamu sedang dimanipulasi.</div>
+      </li>
+      <li>
+        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>
+        <div><strong>Cek siapa yang memberitakan.</strong> Apakah media terdaftar di Dewan Pers? Ada redaktur yang bertanggung jawab? Ada tautan ke sumber primer?</div>
+      </li>
+      <li>
+        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>
+        <div><strong>Waspadai influencer yang selalu dramatis.</strong> Konten yang terus-menerus memancing kemarahan atau ketakutan adalah tanda kreator mungkin sudah terjebak dalam pola audience capture.</div>
+      </li>
+      <li>
+        <span class="check-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>
+        <div><strong>Cari sumber primer.</strong> Untuk isu kebijakan: situs resmi kementerian atau siaran pers KBRI. Untuk isu hukum: teks undang-undangnya sendiri — bukan tafsir dari akun anonim.</div>
+      </li>
+    </ul>
+
+    <p style="margin-top:1.5rem;">Indonesia bukan negara yang sempurna. Ada korupsi, ada masalah nyata, ada yang perlu dikritik. Tapi ia juga bukan negeri yang seluruhnya runtuh seperti yang linimasa media sosialmu ingin kamu percaya. <mark>Memahami cara kerja mesin informasi adalah langkah pertama menjadi warga negara yang kritis — bukan skeptis terhadap semua hal, melainkan selektif dalam mempercayai.</mark></p>
+  </div>
+
+  <!-- SUMBER -->
+  <div class="reveal">
+    <div class="sources">
+      <div class="sources-title">📚 Referensi &amp; Sumber</div>
+      <ol>
+        <li>Baumeister, R. F., Bratslavsky, E., Finkenauer, C., &amp; Vohs, K. D. (2001). <em>Bad is stronger than good.</em> Review of General Psychology, 5(4), 323–370.</li>
+        <li>ANTARA News (15 Juli 2025). <em>KBRI Tokyo: 2026 jadi tahun terakhir PMI ke Jepang tidak benar.</em> <a href="https://www.antaranews.com/berita/4968889/kbri-tokyo-2026-jadi-tahun-terakhir-pmi-ke-jepang-tidak-benar" target="_blank" rel="noopener">antaranews.com</a></li>
+        <li>Tirto.id (22 Juli 2025). <em>Benarkah Jepang Blacklist WNI 2026? Cek Penjelasan KBRI Tokyo.</em> <a href="https://tirto.id/benarkah-jepang-blacklist-wni-2026-cek-penjelasan-kbri-tokyo-heBQ" target="_blank" rel="noopener">tirto.id</a></li>
+        <li>CNN Indonesia (16 Juli 2025). <em>KBRI Tokyo Buka Suara soal Jepang Mau Blacklist Pekerja WNI di 2026.</em> <a href="https://www.cnnindonesia.com/internasional/20250716080504-113-1251184/kbri-tokyo-buka-suara-soal-jepang-mau-blacklist-pekerja-wni-di-2026" target="_blank" rel="noopener">cnnindonesia.com</a></li>
+        <li>Saber Hoaks Jabar — Pemprov Jawa Barat (17 Juli 2025). <em>Indonesia Akan Di-blacklist, 2026 Tahun Terakhir Kesempatan Kerja di Jepang — Hoaks.</em> <a href="https://saberhoaks.jabarprov.go.id/v2/klarifikasi/detail/PTN003465/" target="_blank" rel="noopener">saberhoaks.jabarprov.go.id</a></li>
+        <li>Kompas.com — Ohayo Jepang (26 Juni 2025). <em>Viral Lagi Video PSHT Jepang, KBRI Tokyo Ungkap Kronologi dan Langkah Perbaikan.</em> <a href="https://ohayojepang.kompas.com/read/4246/viral-lagi-video-psht-jepang-kbri-tokyo-ungkap-kronologi-dan-langkap-perbaikan" target="_blank" rel="noopener">ohayojepang.kompas.com</a></li>
+        <li>CNBC Indonesia (6 Des. 2022). <em>RKUHP Disahkan: Check-in Hotel Tidak Nikah, Dipenjara 1 Tahun.</em> <a href="https://www.cnbcindonesia.com/news/20221206112450-4-394165/rkuhp-disahkan-check-in-hotel-tidak-nikah-dipenjara-1-tahun" target="_blank" rel="noopener">cnbcindonesia.com</a></li>
+        <li>Kompas.com (7 Agt. 2025). <em>Negara Bisa Ambil Alih Tanah Terlantar: Ini Aturan dan Mekanismenya.</em> <a href="https://regional.kompas.com/read/2025/08/07/142705078/negara-bisa-ambil-alih-tanah-telantar-ini-aturan-dan-mekanismenya" target="_blank" rel="noopener">kompas.com</a></li>
+        <li>Dewan Pers Indonesia — <em>Kode Etik Jurnalistik dan Verifikasi Media.</em> <a href="https://dewanpers.or.id" target="_blank" rel="noopener">dewanpers.or.id</a></li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════════ KBDI FOOTER — dimuat dari GitHub ══════════════════ -->
+<div id="kbdi-footer-slot"></div>
+
+<script>
+/* ════════════════════════════════════════════════════
+   KBDI COMPONENT LOADER
+   Fetch header.html dan footer.html dari GitHub Pages,
+   inject ke slot, lalu jalankan theme engine.
+   Fallback inline dipakai jika fetch gagal (mis. offline).
+════════════════════════════════════════════════════ */
+(function () {
+  var BASE   = 'https://edukbdi.github.io/';
+  var root   = document.documentElement;
+
+  /* ── 1. Terapkan tema tersimpan SEBELUM render ── */
+  var saved = localStorage.getItem('kbdi-theme') || 'dark';
+  root.setAttribute('data-theme', saved);
+  document.querySelector('meta[name="theme-color"]')
+    .setAttribute('content', saved === 'dark' ? '#0d0f14' : '#ffffff');
+
+  /* ── 2. Fetch helper: ambil HTML lalu strip <html>/<body> wrapper ── */
+  function fetchComponent(url, slot, onDone) {
+    fetch(url, { cache: 'no-cache' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        /* Inject langsung — file sudah hanya berisi <style>+markup+<script> */
+        slot.outerHTML = html;
+        if (onDone) onDone();
+      })
+      .catch(function (err) {
+        console.warn('[KBDI] Gagal memuat ' + url + ':', err);
+        if (onDone) onDone(true); /* fallback */
+      });
+  }
+
+  /* ── 3. Setelah header ter-inject, setup event ── */
+  function setupHeader(usedFallback) {
+    var header  = document.getElementById('kbdi-header');
+    if (!header) return; /* slot belum terganti */
+
+    /* sinkronisasi kelas light/dark ke header */
+    function syncHeader() {
+      var isLight = root.getAttribute('data-theme') === 'light';
+      header.classList.toggle('kbdi-light', isLight);
+    }
+    syncHeader();
+
+    /* shadow saat scroll */
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('kbdi-scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* tombol toggle tema */
+    var btn = document.getElementById('kbdiThemeToggle');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('kbdi-theme', next);
+        document.querySelector('meta[name="theme-color"]')
+          .setAttribute('content', next === 'dark' ? '#0d0f14' : '#ffffff');
+        syncHeader();
+      });
+    }
+  }
+
+  /* ── 4. Mulai fetch — header dulu, footer paralel ── */
+  var headerSlot = document.getElementById('kbdi-header-slot');
+  var footerSlot = document.getElementById('kbdi-footer-slot');
+
+  if (headerSlot) {
+    fetchComponent(BASE + 'header.html', headerSlot, function (fail) {
+      /* Setelah inject, DOM telah berubah — cari ulang elemen */
+      setupHeader(fail);
+    });
+  }
+
+  if (footerSlot) {
+    fetchComponent(BASE + 'footer.html', footerSlot, null);
+  }
+
+  /* ── 5. Progress bar ── */
+  var bar = document.getElementById('progress');
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement;
+    if (bar) bar.style.width =
+      (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+
+  /* ── 6. Reveal on scroll ── */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+})();
+</script>
+
+</body>
+</html>
